@@ -1,0 +1,57 @@
+name: Build PitchBlack Recovery
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Cleanup Runner Environment
+      uses: rokibhasansagar/slimhub_actions@main
+
+    - name: Setup Swap Space
+      uses: pierotofy/set-swap-space@master
+      with:
+        swap-size-gb: 12
+
+    - name: Setup Build Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y git-core gnupg flex bison build-essential zip curl zlib1g-dev \
+          gcc-multilib g++-multilib libc6-dev-i386 libncurses5 libssl-dev libxml2-utils xsltproc \
+          unzip fontconfig aria2
+        mkdir -p ~/bin
+        curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+        chmod a+x ~/bin/repo
+
+    - name: Sync PBRP 12.1 Minimal Source
+      run: |
+        mkdir -p workspace && cd workspace
+        ~/bin/repo init -u https://github.com/PitchBlackRecoveryProject/manifest_pb -b android-12.1 --depth=1
+        ~/bin/repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune -j$(nproc)
+
+    - name: Copy Device Tree
+      run: |
+        mkdir -p workspace/device/xiaomi/fleur
+        # Copy the checked out tree directly into the build path
+        rsync -av --exclude='workspace' --exclude='.git' ./ workspace/device/xiaomi/fleur/
+
+    - name: Build Recovery
+      run: |
+        cd workspace
+        source build/envsetup.sh
+        export ALLOW_MISSING_DEPENDENCIES=true
+        lunch pb_fleur-eng
+        mka pbrp -j$(nproc)
+
+    - name: Upload Recovery Images and ZIP
+      uses: actions/upload-artifact@v4
+      with:
+        name: PBRP-fleur-Recovery
+        path: |
+          workspace/out/target/product/fleur/*.img
+          workspace/out/target/product/fleur/*.zip
