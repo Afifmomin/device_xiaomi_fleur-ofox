@@ -6,7 +6,9 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/twrp_fleur.mk
+    $(LOCAL_DIR)/twrp_fleur.mk \
+    $(LOCAL_DIR)/pb_fleur.mk
 
 COMMON_LUNCH_CHOICES := \
-    twrp_fleur-eng
+    twrp_fleur-eng \
+    pb_fleur-eng

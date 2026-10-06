@@ -32,13 +32,6 @@ PRODUCT_PACKAGES += \
     bootctrl.mt6781 \
     bootctrl.mt6781.recovery
 
-PRODUCT_PACKAGES += \
-    otapreopt_script \
-    cppreopts.sh \
-    update_engine \
-    update_verifier \
-    update_engine_sideload
-
 # VNDK
 PRODUCT_TARGET_VNDK_VERSION := 31
 
