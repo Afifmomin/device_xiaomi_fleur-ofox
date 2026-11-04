@@ -7,6 +7,13 @@
 /vbmeta		          emmc	      /dev/block/platform/bootdevice/by-name/vbmeta	     flags=slotselect;display="VBMeta";backup=1;flashimg=1
 /cust                     ext4        /dev/block/platform/bootdevice/by-name/cust                           flags=display="Cust"
 
+## Dynamic Partitions Image Flashing
+/system_image             emmc        /dev/block/mapper/system                               flags=display="System Image";backup=1;flashimg=1
+/vendor_image             emmc        /dev/block/mapper/vendor                               flags=display="Vendor Image";backup=1;flashimg=1
+/product_image            emmc        /dev/block/mapper/product                              flags=display="Product Image";backup=1;flashimg=1
+/system_ext_image         emmc        /dev/block/mapper/system_ext                           flags=display="System_EXT Image";backup=1;flashimg=1
+/odm_image                emmc        /dev/block/mapper/odm                                  flags=display="ODM Image";backup=1;flashimg=1
+
 ## Firmware
 /misc                     emmc        /dev/block/platform/bootdevice/by-name/misc
 /logo	                  emmc	      /dev/block/platform/bootdevice/by-name/logo	     flags=slotselect;backup=1

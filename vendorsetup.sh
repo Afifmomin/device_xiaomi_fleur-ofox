@@ -39,7 +39,7 @@ fi
 if [ "$1" = "$FDEVICE" ] || [  "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
                 # Build Environment
                 export USE_CCACHE=1
-                export ccache -M 20G
+                ccache -M 20G
 	        export LC_ALL="C"
 
 		# Version / Maintainer infos
@@ -69,7 +69,6 @@ if [ "$1" = "$FDEVICE" ] || [  "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 		export OF_ALLOW_DISABLE_NAVBAR=0
                 export OF_QUICK_BACKUP_LIST="/boot;/data;"
                 export FOX_ENABLE_APP_MANAGER=1
-		export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
                 export OF_FLASHLIGHT_ENABLE=0
 		export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
                 export TW_DEFAULT_LANGUAGE="en"
