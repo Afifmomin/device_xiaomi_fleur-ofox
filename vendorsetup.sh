@@ -22,6 +22,7 @@
 FDEVICE="fleur"
 unset FOX_VERSION
 unset OUT_DIR
+unset OF_FORCE_MAGISKBOOT_BOOT_PATCH_MIUI
 #set -o xtrace
 
 fox_get_target_device() {
