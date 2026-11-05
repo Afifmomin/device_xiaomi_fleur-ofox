@@ -24,6 +24,10 @@ unset FOX_VERSION
 unset OUT_DIR
 export OUT_DIR="out"
 unset OF_FORCE_MAGISKBOOT_BOOT_PATCH_MIUI
+unset OF_AB_DEVICE
+unset OF_VIRTUAL_AB_DEVICE
+unset OF_SUPPORT_ALL_BLOCK_OTA_UPDATES
+unset OF_DISABLE_MIUI_OTA_BY_DEFAULT
 #set -o xtrace
 
 fox_get_target_device() {
@@ -53,8 +57,6 @@ if [ "$1" = "$FDEVICE" ] || [  "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 		# Device info
 		export FOX_AB_DEVICE=1
 		export FOX_VIRTUAL_AB_DEVICE=1
-		export OF_AB_DEVICE=1
-		export OF_VIRTUAL_AB_DEVICE=1
 		export TARGET_DEVICE_ALT="miel,miel_p,fleur_p"
 
 		# Display / Leds
@@ -86,7 +88,6 @@ if [ "$1" = "$FDEVICE" ] || [  "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 
 		# OTA
 		export OF_KEEP_DM_VERITY=1
-		export OF_DISABLE_MIUI_OTA_BY_DEFAULT=1
 
 		# Removes the loop block errors after flashing ZIPs (Workaround)
 		export OF_LOOP_DEVICE_ERRORS_TO_LOG=1
