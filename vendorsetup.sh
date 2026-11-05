@@ -20,6 +20,7 @@
 #
 
 FDEVICE="fleur"
+unset FOX_VERSION
 #set -o xtrace
 
 fox_get_target_device() {

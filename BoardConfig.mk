@@ -7,6 +7,10 @@
 
 DEVICE_PATH := device/xiaomi/fleur
 
+# Clear obsolete variables
+unexport FOX_VERSION
+FOX_VERSION :=
+
 # For building with aosp manifest
 ALLOW_MISSING_DEPENDENCIES := true
 BUILD_BROKEN_DUP_RULES := true
