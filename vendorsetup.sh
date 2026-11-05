@@ -51,6 +51,8 @@ if [ "$1" = "$FDEVICE" ] || [  "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 		# Device info
 		export FOX_AB_DEVICE=1
 		export FOX_VIRTUAL_AB_DEVICE=1
+		export OF_AB_DEVICE=1
+		export OF_VIRTUAL_AB_DEVICE=1
 		export TARGET_DEVICE_ALT="miel,miel_p,fleur_p"
 
 		# Display / Leds
@@ -62,23 +64,43 @@ if [ "$1" = "$FDEVICE" ] || [  "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 		export OF_CLOCK_POS=1 # left and right clock positions available
 		export OF_USE_GREEN_LED=0
 
-                # Removes the loop block errors after flashing ZIPs (Workaround)
-                export OF_LOOP_DEVICE_ERRORS_TO_LOG=1
+		# Partitions
+		export FOX_RECOVERY_SYSTEM_PARTITION="/dev/block/mapper/system"
+		export FOX_RECOVERY_VENDOR_PARTITION="/dev/block/mapper/vendor"
+		export FOX_RECOVERY_BOOT_PARTITION="/dev/block/by-name/boot"
+		export OF_FBE_METADATA_MOUNT_IGNORE=1
+		export OF_QUICK_BACKUP_LIST="/boot;/data;"
+
+		# Magiskboot / Boot patching
+		export OF_USE_MAGISKBOOT=1
+		export OF_USE_MAGISKBOOT_FOR_ALL_PATCHES=1
+		export OF_USE_NEW_MAGISKBOOT=1
+		export OF_DONT_PATCH_ENCRYPTED_DEVICE=1
+		export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
+		export OF_NO_TREBLE_COMPATIBILITY_CHECK=1
+		export OF_PATCH_AVB20=1
+		export FOX_DELETE_AROMAFM=1
+		export FOX_BUGGED_AOSP_ARB_WORKAROUND="1546300800"
+
+		# OTA
+		export OF_KEEP_DM_VERITY=1
+		export OF_SUPPORT_ALL_BLOCK_OTA_UPDATES=1
+		export OF_FIX_OTA_UPDATE_MANUAL_FLASH_ERROR=1
+		export OF_DISABLE_MIUI_OTA_BY_DEFAULT=1
+
+		# Removes the loop block errors after flashing ZIPs (Workaround)
+		export OF_LOOP_DEVICE_ERRORS_TO_LOG=1
 
 		# Other OrangeFox configs
 		export OF_ENABLE_LPTOOLS=1
 		export OF_ALLOW_DISABLE_NAVBAR=0
-                export OF_QUICK_BACKUP_LIST="/boot;/data;"
-                export FOX_ENABLE_APP_MANAGER=1
-		export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
-                export OF_FLASHLIGHT_ENABLE=0
-		export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
-                export TW_DEFAULT_LANGUAGE="en"
+		export FOX_ENABLE_APP_MANAGER=0
+		export FOX_DISABLE_APP_MANAGER=1
+		export OF_FLASHLIGHT_ENABLE=0
+		export TW_DEFAULT_LANGUAGE="en"
 		export OF_USE_SYSTEM_FINGERPRINT=1
-                export FOX_REPLACE_BUSYBOX_PS=1
-	        export OF_FORCE_MAGISKBOOT_BOOT_PATCH_MIUI=1
-	        export OF_USE_NEW_MAGISKBOOT=1
-	        export OF_SKIP_MULTIUSER_FOLDERS_BACKUP=1
+		export FOX_REPLACE_BUSYBOX_PS=1
+		export OF_SKIP_MULTIUSER_FOLDERS_BACKUP=1
 
 		# Run a process after formatting data to work-around MTP issues
 		export OF_RUN_POST_FORMAT_PROCESS=1

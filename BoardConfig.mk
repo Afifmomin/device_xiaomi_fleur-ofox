@@ -23,6 +23,7 @@ AB_OTA_PARTITIONS += \
     vbmeta_vendor \
     vbmeta_system
 
+TARGET_NO_RECOVERY := true
 BOARD_USES_RECOVERY_AS_BOOT := true
 
 # Architecture
